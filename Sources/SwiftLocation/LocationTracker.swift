@@ -155,15 +155,21 @@ public final class LocationTracker: NSObject, CLLocationManagerDelegate {
 				}
 				// If best frequency is significant location update (and hardware supports it) then start only significant location update
 				locationManager.stopUpdatingLocation()
-				locationManager.allowsBackgroundLocationUpdates = true
+                if #available(iOS 9.0, *) {
+                    locationManager.allowsBackgroundLocationUpdates = true
+                }
 				locationManager.startMonitoringSignificantLocationChanges()
 			case .deferredUntil(_,_,_):
 				locationManager.stopMonitoringSignificantLocationChanges()
-				locationManager.allowsBackgroundLocationUpdates = true
+                if #available(iOS 9.0, *) {
+                    locationManager.allowsBackgroundLocationUpdates = true
+                }
 				locationManager.startUpdatingLocation()
 			default:
 				locationManager.stopMonitoringSignificantLocationChanges()
-				locationManager.allowsBackgroundLocationUpdates = false
+                if #available(iOS 9.0, *) {
+                    locationManager.allowsBackgroundLocationUpdates = false
+                }
 				locationManager.startUpdatingLocation()
 				locationManager.disallowDeferredLocationUpdates()
 			}
@@ -654,7 +660,9 @@ public final class LocationTracker: NSObject, CLLocationManagerDelegate {
 		if let defSettings = deferredLocationSettings() {
 			if self.isDeferred == false {
 				locationManager.desiredAccuracy = defSettings.accuracy.level
-				locationManager.allowsBackgroundLocationUpdates = true
+                if #available(iOS 9.0, *) {
+                    locationManager.allowsBackgroundLocationUpdates = true
+                }
 				locationManager.pausesLocationUpdatesAutomatically = true
 				locationManager.allowDeferredLocationUpdates(untilTraveled: defSettings.meters, timeout: defSettings.timeout)
 				self.isDeferred = true
@@ -930,7 +938,9 @@ public final class LocationTracker: NSObject, CLLocationManagerDelegate {
 		// Request queued and running.
 		
 		let isAppInBackground = (UIApplication.shared.applicationState == .background && CLLocationManager.isBackgroundUpdateEnabled)
-		self.locationManager.allowsBackgroundLocationUpdates = isAppInBackground
+        if #available(iOS 9.0, *) {
+            self.locationManager.allowsBackgroundLocationUpdates = isAppInBackground
+        }
 		if isAppInBackground { self.autoPauseUpdates = false }
 		
 		// Resume any paused request (a paused request is in `.waitingUserAuth`,`.paused` or `.failed`)
