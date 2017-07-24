@@ -205,7 +205,7 @@ Location.getLocation(accuracy: .IPScan(IPService(.freeGeoIP)), frequency: .oneSh
 ```
 
 Note:
-To be able to find user's location this way, you need to update your info.plist and add required security settings for it. (iOS 9+):
+To be able to find user's location this way, you need to update your info.plist and add required security settings for it. (iOS 8+):
 
 ```
 <dict>
@@ -483,7 +483,7 @@ Add swiftline as dependency in your `Package.swift`
 Current version is compatible with:
 
 * Swift 3.0+
-* iOS 9.0 or later
+* iOS 8.0 or later
 
 ([Index ↑](#index))
 
