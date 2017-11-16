@@ -357,7 +357,7 @@ Pull requests are welcome and encouraged.
 ### Requirements
 Current supported version of SwiftLocation require:
 
-* **Minimum OS**: iOS 9, macOS 10.10 or watchOS 3.0
+* **Minimum OS**: iOS 8, macOS 10.10 or watchOS 3.0
 * **Swift**: Swift 4
 
 <a name="installation"/>

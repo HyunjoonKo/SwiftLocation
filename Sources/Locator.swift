@@ -94,8 +94,23 @@ public class LocatorManager: NSObject, CLLocationManagerDelegate {
 	
 	/// It is possible to force enable background location fetch even if your set any kind of Authorizations
 	public var backgroundLocationUpdates: Bool {
-		set { self.manager.allowsBackgroundLocationUpdates = true }
-		get { return self.manager.allowsBackgroundLocationUpdates }
+		set {
+            if #available(iOSApplicationExtension 9.0, *) {
+                self.manager.allowsBackgroundLocationUpdates = true
+            } else {
+                // Fallback on earlier versions
+            }
+            
+        }
+		get {
+            if #available(iOSApplicationExtension 9.0, *) {
+                return self.manager.allowsBackgroundLocationUpdates
+            } else {
+                // Fallback on earlier versions
+                return false
+            }
+            
+        }
 	}
 	
 	/// Returns the most recent current location, or nil if the current
